@@ -1,10 +1,10 @@
 package jar.lesson1.employeespring.record;
 
 public class EmployeeRequest {
-    private   String firstName;
-    private   String lastName;
-    private   int department;
-    private  int salary;
+    private String firstName;
+    private String lastName;
+    private int department;
+    private int salary;
 
     public String getFirstName() {
         return firstName;

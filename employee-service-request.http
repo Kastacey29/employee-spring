@@ -1,5 +1,6 @@
 ### Получить всех сотрудников
 GET http://localhost:8080/employees
+
 ### Создать сотрудника
 POST http://localhost:8080/employees
 Content-Type: application/json
@@ -9,8 +10,8 @@ Content-Type: application/json
   "lastName": "Смирнова",
   "department": 2,
   "salary": 1000
-
 }
+
 ### Создать сотрудника 2
 POST http://localhost:8080/employees
 Content-Type: application/json
@@ -20,7 +21,6 @@ Content-Type: application/json
   "lastName": "Иванов",
   "department": 1,
   "salary": 2000
-
 }
 
 ### Получить сумму зарплат

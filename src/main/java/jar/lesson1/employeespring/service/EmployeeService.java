@@ -13,21 +13,21 @@ import static java.util.stream.Collectors.groupingBy;
 
 @Service
 public class EmployeeService {
-private final Map<Integer, Employee> employees = new HashMap<>();
+    private final Map<Integer, Employee> employees = new HashMap<>();
 
     public Collection<Employee> getAllEmployees() {
-        return  this.employees.values();
+        return this.employees.values();
     }
 
     public Employee addEmployee(EmployeeRequest employeeRequest) {
         if (employeeRequest.getFirstName() == null || employeeRequest.getLastName() == null) {
-            throw  new IllegalArgumentException("Name not found!");
+            throw new IllegalArgumentException("Name not found!");
         }
-        Employee employee=new Employee(employeeRequest.getFirstName(),employeeRequest.getLastName(),
-                employeeRequest.getDepartment(),employeeRequest.getSalary());
+        Employee employee = new Employee(employeeRequest.getFirstName(), employeeRequest.getLastName(),
+                employeeRequest.getDepartment(), employeeRequest.getSalary());
 
-        this.employees.put(employee.getId(),employee);
-        return  employee;
+        this.employees.put(employee.getId(), employee);
+        return employee;
     }
 
     public int getSalarySum() {
@@ -39,14 +39,16 @@ private final Map<Integer, Employee> employees = new HashMap<>();
         return this.employees.values().stream()
                 .max(Comparator.comparingInt(Employee::getSalary)).orElse(null);
     }
+
     public Employee getEmployeeWithSalaryMin() {
         return this.employees.values().stream()
                 .min(Comparator.comparingInt(Employee::getSalary)).orElse(null);
     }
+
     public Collection<Employee> getEmployeesWithSalaryMoreAverage() {
-        double average=  this.employees.values().stream().
+        double average = this.employees.values().stream().
                 mapToInt(Employee::getSalary).average().orElseThrow();
-return this.employees.values().stream()
-        .filter(employee -> employee.getSalary()>average).collect(Collectors.toList());
+        return this.employees.values().stream()
+                .filter(employee -> employee.getSalary() > average).collect(Collectors.toList());
     }
 }
