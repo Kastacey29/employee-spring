@@ -1,7 +1,9 @@
 package jar.lesson1.employeespring.service;
 
+import jar.lesson1.employeespring.exception.WrongDataException;
 import jar.lesson1.employeespring.model.Employee;
 import jar.lesson1.employeespring.record.EmployeeRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -19,11 +21,18 @@ public class EmployeeService {
         return this.employees.values();
     }
 
-    public Employee addEmployee(EmployeeRequest employeeRequest) {
+    public Employee addEmployee(EmployeeRequest employeeRequest) throws WrongDataException {
         if (employeeRequest.getFirstName() == null || employeeRequest.getLastName() == null) {
-            throw new IllegalArgumentException("Name not found!");
+            throw new WrongDataException("Данные некорректны!");
         }
-        Employee employee = new Employee(employeeRequest.getFirstName(), employeeRequest.getLastName(),
+        if (StringUtils.isBlank(employeeRequest.getFirstName()) || StringUtils.isBlank(employeeRequest.getLastName())) {
+            throw new WrongDataException("Данные некорректны!");
+        }
+        if (!StringUtils.isAlpha(employeeRequest.getFirstName()) ||! StringUtils.isAlpha(employeeRequest.getLastName())) {
+            throw new WrongDataException("Данные некорректны!");
+        }
+        Employee employee = new Employee(StringUtils.capitalize(employeeRequest.getFirstName()),
+                StringUtils.capitalize(employeeRequest.getLastName()),
                 employeeRequest.getDepartment(), employeeRequest.getSalary());
 
         this.employees.put(employee.getId(), employee);
@@ -51,4 +60,6 @@ public class EmployeeService {
         return this.employees.values().stream()
                 .filter(employee -> employee.getSalary() > average).collect(Collectors.toList());
     }
+
+
 }
