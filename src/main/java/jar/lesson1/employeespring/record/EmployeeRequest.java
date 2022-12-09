@@ -1,6 +1,8 @@
 package jar.lesson1.employeespring.record;
 
 public class EmployeeRequest {
+    private static int counter;
+    private final int id;
     private String firstName;
     private String lastName;
     private int department;
@@ -10,12 +12,24 @@ public class EmployeeRequest {
         return firstName;
     }
 
+    public EmployeeRequest(String firstName, String lastName, int department, int salary) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.department = department;
+        this.salary = salary;
+        this.id=counter++;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setLastName(String lastName) {

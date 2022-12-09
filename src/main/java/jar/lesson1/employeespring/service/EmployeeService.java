@@ -21,14 +21,14 @@ public class EmployeeService {
         return this.employees.values();
     }
 
-    public Employee addEmployee(EmployeeRequest employeeRequest) throws WrongDataException {
+    public Employee addEmployee(EmployeeRequest employeeRequest)  {
         if (employeeRequest.getFirstName() == null || employeeRequest.getLastName() == null) {
             throw new WrongDataException("Данные некорректны!");
         }
         if (StringUtils.isBlank(employeeRequest.getFirstName()) || StringUtils.isBlank(employeeRequest.getLastName())) {
             throw new WrongDataException("Данные некорректны!");
         }
-        if (!StringUtils.isAlpha(employeeRequest.getFirstName()) ||! StringUtils.isAlpha(employeeRequest.getLastName())) {
+        if (!StringUtils.isAlpha(employeeRequest.getFirstName()) || !StringUtils.isAlpha(employeeRequest.getLastName())) {
             throw new WrongDataException("Данные некорректны!");
         }
         Employee employee = new Employee(StringUtils.capitalize(employeeRequest.getFirstName()),
@@ -61,5 +61,7 @@ public class EmployeeService {
                 .filter(employee -> employee.getSalary() > average).collect(Collectors.toList());
     }
 
-
+public Employee removeEmployee(int id) {
+        return  employees.remove(id);
+}
 }

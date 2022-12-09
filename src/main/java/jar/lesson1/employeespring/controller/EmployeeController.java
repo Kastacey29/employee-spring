@@ -55,4 +55,5 @@ public class EmployeeController {
     public Collection<Employee> getEmployeesWithSalaryMoreAverage() {
         return this.employeeService.getEmployeesWithSalaryMoreAverage();
     }
+
 }
