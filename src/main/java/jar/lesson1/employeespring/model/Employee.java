@@ -1,19 +1,21 @@
 package jar.lesson1.employeespring.model;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Employee {
     private static int counter;
-    private final  int id;
-    private  final String firstName;
-    private  final String lastName;
-    private final  int department;
-    private final  int salary;
+    private final int id;
+    private final String firstName;
+    private final String lastName;
+    private final int department;
+    private final int salary;
 
     public Employee(String firstName, String lastName, int department, int salary) {
-        this.firstName = firstName;
+                this.firstName = firstName;
         this.lastName = lastName;
         this.department = department;
         this.salary = salary;
-        this.id=counter++;
+        this.id = counter++;
     }
 
     public int getId() {
